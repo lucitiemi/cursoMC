@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +30,7 @@ public class Produto implements Serializable {
 	
 	
 	// associacoes
+	@JsonBackReference			// buscar caterogoria e retornar a categoria e seus produtos: essa anotacao omite a lista de categorias em cada produto, tirando assim o looping (pois categoria puxa uma lista de produto e um produto puxa uma lista de categorias)
 	@ManyToMany
 	@JoinTable(name = "PRODUTO_CATEGORIA", 
 				joinColumns = @JoinColumn(name = "produto_id"),
