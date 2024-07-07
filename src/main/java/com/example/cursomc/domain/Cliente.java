@@ -41,6 +41,9 @@ public class Cliente implements Serializable {
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>(); 		// como telefone eh uma classe fraca, optou-se por criar uma lista de telefones (o Set garante que nao se repita valores)
 
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
+	
 	
 	// construtores:
 	public Cliente() {}
@@ -111,6 +114,15 @@ public class Cliente implements Serializable {
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
 	}
+	
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+	
 
 	
 	// hash e equals
@@ -130,7 +142,8 @@ public class Cliente implements Serializable {
 		Cliente other = (Cliente) obj;
 		return Objects.equals(id, other.id);
 	}
-	
+
+
 	
 	
 	
