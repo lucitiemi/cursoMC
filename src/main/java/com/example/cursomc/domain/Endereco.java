@@ -3,6 +3,8 @@ package com.example.cursomc.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,6 +28,7 @@ public class Endereco implements Serializable {
 	
 	
 	// associacoes:
+	@JsonBackReference						// Protege contra serialização Json cíclica (esconde os clientes de determinado endereco)
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
