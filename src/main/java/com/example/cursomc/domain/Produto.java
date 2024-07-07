@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -33,7 +32,7 @@ public class Produto implements Serializable {
 	
 	
 	// associacoes
-	@JsonBackReference			// buscar caterogoria e retornar a categoria e seus produtos: essa anotacao omite a lista de categorias em cada produto, tirando assim o looping (pois categoria puxa uma lista de produto e um produto puxa uma lista de categorias)
+	@JsonIgnore										// buscar caterogoria e retornar a categoria e seus produtos: essa anotacao ignora a lista de categorias em cada produto, tirando assim o looping (pois categoria puxa uma lista de produto e um produto puxa uma lista de categorias)
 	@ManyToMany
 	@JoinTable(name = "PRODUTO_CATEGORIA", 
 				joinColumns = @JoinColumn(name = "produto_id"),

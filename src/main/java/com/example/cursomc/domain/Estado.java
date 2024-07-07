@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +25,7 @@ public class Estado implements Serializable {
 	
 	
 	// associacoes
-	@JsonBackReference									// Protege contra serialização Json cíclica (esconde as cidades de determinado estado)
+	@JsonIgnore									// Protege contra serialização Json cíclica (nao serializa as cidades de determinado estado)
 	@OneToMany(mappedBy = "estado")
 	private List<Cidade> cidades = new ArrayList<>();
 	

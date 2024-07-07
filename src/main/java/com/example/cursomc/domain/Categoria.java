@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +25,6 @@ public class Categoria implements Serializable {
 	
 	
 	// associacoes:
-	@JsonManagedReference				// buscar caterogoria e retornar a categoria e seus produtos: essa anotacao tira o looping, pois categoria puxa uma lista de produto e um produto puxa uma lista de categorias
 	@ManyToMany(mappedBy = "categorias")
 	private List<Produto> produtos = new ArrayList<>();
 	

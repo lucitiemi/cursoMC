@@ -8,8 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import com.example.cursomc.domain.enums.TipoCliente;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.ElementCollection;
@@ -34,7 +33,6 @@ public class Cliente implements Serializable {
 	
 	
 	// associacoes:
-	@JsonManagedReference 									// Protege contra serialização Json cíclica
 	@OneToMany(mappedBy = "cliente")
 	private List<Endereco> enderecos = new ArrayList<>();
 	
@@ -42,7 +40,7 @@ public class Cliente implements Serializable {
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>(); 		// como telefone eh uma classe fraca, optou-se por criar uma lista de telefones (o Set garante que nao se repita valores)
 
-	@JsonBackReference										// Protege contra serialização Json cíclica (esconde os pedidos de determinado cliente)
+	@JsonIgnore												// Protege contra serialização Json cíclica (nao serializa os pedidos de determinado cliente)
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
 	
